@@ -27,7 +27,7 @@ import java.util.Map;
 
             public static String toString(Map<String, Integer> map) {
                 if(map == null) {
-                    return "{}";
+                    return map.toString();
                 }
                 String result = "{\n";
                 for (Map.Entry<String, Integer> word : map.entrySet()) {
