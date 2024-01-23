@@ -8,7 +8,7 @@ import java.util.Map;
         public class App {
             public static Map<String, Integer> getWordCount(String line) {
                 if (line == null || line.equals("")) {
-                    return null;
+                    return new HashMap<>();
                 }
                 String[] arrayOfWords = line.split(" ");
                 List<String> listOfWords = Arrays.asList(arrayOfWords);
@@ -26,13 +26,22 @@ import java.util.Map;
             }
 
             public static String toString(Map<String, Integer> map) {
-                if(map == null) {
-                    return map.toString();
+                if(map.isEmpty()) {
+                    return "{}";
+                } else {
+                    String result = "";
+                    for (Map.Entry<String, Integer> word : map.entrySet()) {
+                        result += "  " + word.getKey() + ": " + word.getValue() + "\n";
+                    }
+                    return "{\n" + result + "}";
                 }
-                String result = "{\n";
-                for (Map.Entry<String, Integer> word : map.entrySet()) {
-                    result += "  " + word.getKey() + ": " + word.getValue() + "\n";
-                }
-                return result + "}";
+            }
+
+            public static void main(String[] args) {
+                String sentence3 = "";
+                Map wordCount3 = App.getWordCount(sentence3);
+                System.out.println(wordCount3);
+                String actual3 = App.toString(wordCount3);
+                System.out.println(actual3);;
             }
         }
