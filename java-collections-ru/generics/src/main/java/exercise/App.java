@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.Map.Entry;
 
         public class App {
-
             public static List<Map<String, String>> findWhere(List<Map<String, String>> listOfBooks, Map<String, String> strings) {
                 if (listOfBooks.isEmpty() || strings.isEmpty()) {
                     return new ArrayList<>();
@@ -13,15 +12,14 @@ import java.util.Map.Entry;
 
                 for (Map<String, String> book : listOfBooks) {
                     for (Map.Entry<String, String> book2 : strings.entrySet()) {
-                        if (book.get("title").equals(book2.getValue()) ||
-                                book.get("author").equals(book2.getValue()) ||
-                                book.get("year").equals(book2.getValue())) {
-                            if (!coincidenceOfNames.contains(book)) {
-                                coincidenceOfNames.add(book);
+                        Map<String, String> mapBook = Map.of(book2.getKey(), book2.getValue());
+                        if (book.get(book2.getKey()).equals(book2.getValue())) {
+                                if (!coincidenceOfNames.contains(mapBook)) {
+                                    coincidenceOfNames.add(Map.of(book2.getKey(),book2.getValue()));
+                                }
                             }
-                        } 
+                        }
                     }
-                }
             return coincidenceOfNames;
             }
 
