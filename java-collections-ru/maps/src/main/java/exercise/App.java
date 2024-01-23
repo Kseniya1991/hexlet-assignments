@@ -7,27 +7,32 @@ import java.util.Map;
 
         public class App {
             public static Map<String, Integer> getWordCount(String line) {
+                if (line == null || line.equals("")) {
+                    return null;
+                }
                 String[] arrayOfWords = line.split(" ");
                 List<String> listOfWords = Arrays.asList(arrayOfWords);
                 Map<String, Integer> words = new HashMap<>();
 
-                for (int i = 0; i < listOfWords.size(); i++) {
-                    if(words.containsKey(listOfWords.get(i))) {
-                        int index = words.get(listOfWords.get(i)) + 1;
-                        words.put(listOfWords.get(i), index);
+                for (String word : listOfWords) {
+                    if (words.containsKey(word)) {
+                        int index = words.get(word) + 1;
+                        words.put(word, index);
                     } else {
-                        words.put(listOfWords.get(i), 1);
+                        words.put(word, 1);
                     }
                 }
                 return words;
             }
 
             public static String toString(Map<String, Integer> map) {
+                if(map == null) {
+                    return "";
+                }
                 String result = "{\n";
                 for (Map.Entry<String, Integer> word : map.entrySet()) {
                     result += "  " + word.getKey() + ": " + word.getValue() + "\n";
                 }
                 return result + "}";
-
             }
         }
