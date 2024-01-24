@@ -8,19 +8,20 @@ import java.util.Map.Entry;
                 if (listOfBooks.isEmpty() || strings.isEmpty()) {
                     return new ArrayList<>();
                 }
-                List<Map<String, String>> coincidenceOfNames = new ArrayList<>();
+                List<Map<String, String>> coincidenceOfNames = new ArrayList<>(listOfBooks);
 
-                for (Map<String, String> book : listOfBooks) {
-                    for (Map.Entry<String, String> book2 : strings.entrySet()) {
-                        Map<String, String> mapBook = Map.of(book2.getKey(), book2.getValue());
-                        if (book.get(book2.getKey()).equals(book2.getValue())) {
-                                if (!coincidenceOfNames.contains(mapBook)) {
-                                    coincidenceOfNames.add(Map.of(book2.getKey(),book2.getValue()));
+                for (var value : listOfBooks) { //мапа из списка
+                    for (Map.Entry<String, String> map : value.entrySet()) { //ключи и значения из мапы из списка
+                        for (Map.Entry<String, String> string : strings.entrySet()) { //ключи и значения из переданной в метод мапы
+                            if (!value.containsValue(string.getValue())) {
+                                if (coincidenceOfNames.contains(value)) {
+                                    coincidenceOfNames.remove(value);
                                 }
                             }
                         }
                     }
-            return coincidenceOfNames;
+                }
+                return coincidenceOfNames;
             }
 
             public static void main(String[] args) {
