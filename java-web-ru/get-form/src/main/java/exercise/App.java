@@ -25,8 +25,7 @@ public final class App {
             if (term == null) {
                 users = USERS;
             } else {
-                users = USERS
-                        .stream()
+                users = USERS.stream()
                         .filter(u -> {
                             return StringUtils.startsWithIgnoreCase(u.getFirstName(), term);
                         })
