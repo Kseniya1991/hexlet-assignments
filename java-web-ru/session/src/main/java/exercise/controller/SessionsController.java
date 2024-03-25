@@ -15,16 +15,16 @@ public class SessionsController {
     // BEGIN
     public static void build(Context ctx) {
         var page = new LoginPage("", "");
-        ctx.render("build.jte", Collections.singletonMap("page", page));
+        ctx.render("posts/build.jte", Collections.singletonMap("page", page));
     }
     public static void index(Context ctx) {
         var page = new MainPage(ctx.sessionAttribute("user"));
-        ctx.render("index.jte", Collections.singletonMap("page", page));
+        ctx.render("posts/index.jte", Collections.singletonMap("page", page));
     }
 
     public static void build(Context ctx) {
         var page = new LoginPage("", "");
-        ctx.render("build.jte", Collections.singletonMap("page", page));
+        ctx.render("posts/build.jte", Collections.singletonMap("page", page));
     }
 
     public static void create(Context ctx) {
@@ -39,7 +39,7 @@ public class SessionsController {
         } else {
             var errorMessage = "Wrong username or password";
             var page = new LoginPage(name, errorMessage);
-            ctx.render("build.jte", Collections.singletonMap("page", page));
+            ctx.render("posts/build.jte", Collections.singletonMap("page", page));
         }
     }
 
