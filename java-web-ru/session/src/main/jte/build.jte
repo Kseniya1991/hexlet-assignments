@@ -3,7 +3,7 @@
 @param LoginPage page
 
 <%--@if (page.getError().length() != 0)--%>
-    <p>${page.getError()}</p>
+<p>${page.getError()}</p>
 <%--@endif--%>
 <form action="${NamedRoutes.loginPath()}" method="post">
     <div>
