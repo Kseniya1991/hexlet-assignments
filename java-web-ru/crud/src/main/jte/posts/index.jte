@@ -1,32 +1,37 @@
+<!-- BEGIN -->
 @import exercise.dto.posts.PostsPage
-@param PostsPage postsPage
+@import exercise.controller.PostsController
+@param PostsPage page
 
-<html>
+<html lang="en">
 <head>
-    <title>Post page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+          crossorigin="anonymous">
+    <title>Hello Hexlet!</title>
 </head>
 <body>
-<table>
-    <th>Name</th>
-    <th>Post</th>
-    @for (int i = (postsPage.getPage() - 1) * 5; i < (postsPage.getPage() - 1) * 5 + 5; ++i)
-        <tr>
-            <td>${postsPage.getPostsPage().get(i).getName()}</td>
-            <td>${postsPage.getPostsPage().get(i).getBody()}</td>
-        </tr>
-    @endfor
-</table>
-
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="/posts?page=1">1</a></li>
-        <li class="page-item"><a class="page-link" href="/posts?page=2">2</a></li>
-        <li class="page-item"><a class="page-link" href="/posts?page=3">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-</nav>
-
+<div class="mx-auto p-4 py-md-5">
+    <main>
+        <h1>Posts</h1>
+        <table class="table table-striped">
+            @for(var post : page.getPosts())
+                <tr>
+                    <td>
+                        <a href="/posts/${post.getId()}">${post.getName()}</a>
+                    </td>
+                </tr>
+            @endfor
+        </table>
+        <div><a href="/posts?page=2">Forward</a></div>
+        <div><a href="/posts?page=1">Back</a></div>
+        <div><a href="/posts?page=3">Back</a></div>
+    </main>
+</div>
 </body>
 </html>
+
+<!-- END -->

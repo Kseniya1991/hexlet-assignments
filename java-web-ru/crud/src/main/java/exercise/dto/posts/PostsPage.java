@@ -11,8 +11,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public class PostsPage {
-    private List<Post> postsPage;
-    private int page;
+    public List<Post> posts;
 }
 // END
 

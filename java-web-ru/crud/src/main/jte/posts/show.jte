@@ -1,17 +1,25 @@
+<!-- BEGIN -->
 @import exercise.dto.posts.PostPage
-@import exercise.util.NamedRoutes
-@param PostPage postPage
+@param PostPage page
 
-<html>
+<html lang="en">
 <head>
-    <title>Post page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+          crossorigin="anonymous">
+    <title>Hello Hexlet!</title>
 </head>
 <body>
-<h3>Name</h3>
-<p>${postPage.getPost().getName()}</p>
-<h3>Post</h3>
-<p>${postPage.getPost().getBody()}</p>
-<a href="${NamedRoutes.postsPath()}">All posts</a>
+<div class="mx-auto p-4 py-md-5">
+    <main>
+        <h2>${page.getPost().getName()}</h2>
+        <div>${page.getPost().getBody()}</div>
+        <div><a href="/posts">Back</a></div>
+    </main>
+</div>
 </body>
 </html>
+<!-- END -->
