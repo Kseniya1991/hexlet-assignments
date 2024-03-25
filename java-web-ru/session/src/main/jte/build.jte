@@ -1,22 +1,25 @@
-@import exercise.util.NamedRoutes
 @import exercise.dto.LoginPage
+@import exercise.util.NamedRoutes
 @param LoginPage page
 
-<%--@if (page.getError().length() != 0)--%>
-<p>${page.getError()}</p>
-<%--@endif--%>
-<form action="${NamedRoutes.loginPath()}" method="post">
-    <div>
-        <label>
-            Login
-            <input type="text" name="name"/>
-        </label>
-    </div>
-    <div>
-        <label>
-            Password
-            <input type="password" name="password"/>
-        </label>
-    </div>
-    <input type="submit" value="Enter"/>
-</form>
+@template.layout.page(
+content = @`
+    @if(page.getError() != null)
+        ${page.getError()}
+    @endif
+
+    <form action="${NamedRoutes.loginPath()}" method="post">
+        <div>
+            <label>
+                Enter your name
+                <input type="text" name="name" required value="${page.getName()}" />
+            </label>
+            <label>
+                Enter your password
+                <input type="password" name="password" />
+            </label>
+            <input type="submit" name="Confirm">
+        </div>
+    </form>
+`
+)
