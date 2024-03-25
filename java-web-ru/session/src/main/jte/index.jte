@@ -2,20 +2,12 @@
 @import exercise.dto.MainPage
 @param MainPage page
 
-@template.layout.page(
-content = @`
-    @if (page.getName() != null)
-        <h1 class="mb-3"> Добро пожаловать, ${page.getName().toString()}</h1>
-        <form action="${NamedRoutes.logoutPath()}" method="post">
-            <input type="submit" value="Выйти">
-        </form>
-    @else
-        <h1 class="mb-3"> Добро пожаловать, гость</h1>
-        <form action="${NamedRoutes.buildSessionPath()}" method="get">
-            <input type="submit" value="Войти">
-        </form>
-    @endif
-
-
-`
-)
+@if (page.getName().toString() != "")
+    <form action="${NamedRoutes.logoutPath()}" method="post">
+        <h1>${page.getName().toString()}</h1>
+        <%--    h1><a href="${NamedRoutes.logoutPath()}">Выйти</a></h1>--%>
+        <input type="submit" value="Выйти"/>
+    </form>
+@else
+    <h1><a href="${NamedRoutes.buildSessionPath()}">Войти</a></h1>
+@endif
