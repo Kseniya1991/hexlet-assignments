@@ -1,6 +1,6 @@
 package exercise.controller;
 
-import static io.javalin.rendering.template.TemplateUtil.model;
+
 import exercise.dto.MainPage;
 import exercise.dto.LoginPage;
 import exercise.repository.UsersRepository;
@@ -8,11 +8,13 @@ import static exercise.util.Security.encrypt;
 
 import io.javalin.http.Context;
 
+import java.util.Collections;
+
 public class SessionsController {
 
     // BEGIN
     public static void build(Context ctx) {
-        var page = new LoginPage("","");
+        var page = new LoginPage("", "");
         ctx.render("build.jte", Collections.singletonMap("page", page));
     }
     public static void index(Context ctx) {
