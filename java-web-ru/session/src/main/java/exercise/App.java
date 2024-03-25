@@ -10,8 +10,7 @@ public final class App {
     public static Javalin getApp() {
 
         var app = Javalin.create(config -> {
-            config.bundledPlugins.enableDevLogging();
-            config.fileRenderer(new JavalinJte());
+            config.plugins.enableDevLogging();
         });
 
         // BEGIN
