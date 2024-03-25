@@ -54,7 +54,7 @@ public class PostsController {
     public static void show(Context ctx) {
         var id = ctx.pathParamAsClass("id", Long.class).get();
         var post = PostRepository.find(id)
-            .orElseThrow(() -> new NotFoundResponse("Post not found"));
+                .orElseThrow(() -> new NotFoundResponse("Post not found"));
 
         var page = new PostPage(post);
         ctx.render("posts/show.jte", model("page", page));
