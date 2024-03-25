@@ -9,6 +9,7 @@ import static exercise.util.Security.encrypt;
 import exercise.util.NamedRoutes;
 import exercise.util.Security;
 import io.javalin.http.Context;
+import io.javalin.validation.ValidationException;
 
 import java.util.Collections;
 
