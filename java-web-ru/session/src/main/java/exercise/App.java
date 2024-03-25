@@ -3,6 +3,7 @@ package exercise;
 import io.javalin.Javalin;
 import exercise.controller.SessionsController;
 import exercise.util.NamedRoutes;
+import io.javalin.rendering.template.JavalinJte;
 
 
 public final class App {
@@ -10,14 +11,15 @@ public final class App {
     public static Javalin getApp() {
 
         var app = Javalin.create(config -> {
-            config.plugins.enableDevLogging();
+            config.bundledPlugins.enableDevLogging();
+            config.fileRenderer(new JavalinJte());
         });
 
         // BEGIN
-        app.get(NamedRoutes.rootPath(), SessionsController::index);
-        app.get(NamedRoutes.buildSessionPath(), SessionsController::build);
+        app.get( NamedRoutes.rootPath(), SessionsController::index);
+        app.get( NamedRoutes.buildSessionPath(), SessionsController::build);
         app.post(NamedRoutes.loginPath(), SessionsController::create);
-        app.post(NamedRoutes.logoutPath(), SessionsController::destroy);
+        app.post(NamedRoutes.logoutPath(), SessionsController::delete);
         // END
 
         return app;

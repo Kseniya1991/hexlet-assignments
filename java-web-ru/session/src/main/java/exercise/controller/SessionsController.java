@@ -1,47 +1,58 @@
 package exercise.controller;
 
-import java.util.Collections;
+import static io.javalin.rendering.template.TemplateUtil.model;
 import exercise.dto.MainPage;
 import exercise.dto.LoginPage;
 import exercise.repository.UsersRepository;
 import static exercise.util.Security.encrypt;
 
-import exercise.util.Generator;
 import exercise.util.NamedRoutes;
+import exercise.util.Security;
 import io.javalin.http.Context;
-import io.javalin.validation.ValidationException;
+
+import java.util.Collections;
 
 public class SessionsController {
 
     // BEGIN
     public static void index(Context ctx) {
-        var page = new MainPage(ctx.sessionAttribute("user"));
+        var name = ctx.sessionAttribute("username");
+        var page = new MainPage(name);
+
         ctx.render("index.jte", Collections.singletonMap("page", page));
     }
 
     public static void build(Context ctx) {
-        var page = new LoginPage("", "");
-        ctx.render("build.jte", Collections.singletonMap("page", page));
+        ctx.render("build.jte");
     }
 
     public static void create(Context ctx) {
-        var name = ctx.formParam("name");
-        var password = ctx.formParam("password");
+        try {
+            var name = ctx.formParamAsClass("name", String.class)
+                    .check(name1 -> UsersRepository.existsByName(name1),
+                            "Wrong username or password")
+                    .get();
 
-        var user = UsersRepository.findByName(name);
+            var password = ctx.formParamAsClass("password", String.class)
+                    .check(value -> UsersRepository.findByName(name).
+                                    getPassword().equals(Security.encrypt(value)),
+                            "Wrong username or password")
+                    .get();
 
-        if (user != null && user.getPassword().equals(encrypt(password))) {
-            ctx.sessionAttribute("user", user.getName());
-            ctx.redirect("/");
-        } else {
-            var errorMessage = "Wrong username or password";
-            var page = new LoginPage(name, errorMessage);
+            ctx.sessionAttribute("username", name);
+            ctx.redirect(NamedRoutes.rootPath());
+
+        } catch (ValidationException e) {
+            var name = ctx.formParam("name");
+            var errorText = "Wrong username or password";
+            var page = new LoginPage(name, errorText);
+
             ctx.render("build.jte", Collections.singletonMap("page", page));
         }
     }
 
-    public static void destroy(Context ctx) {
-        ctx.sessionAttribute("user", null);
+    public static void delete(Context ctx) {
+        ctx.sessionAttribute("username", null);
         ctx.redirect(NamedRoutes.rootPath());
     }
     // END

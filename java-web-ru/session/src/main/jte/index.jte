@@ -2,19 +2,19 @@
 @import exercise.util.NamedRoutes
 @param MainPage page
 
+<!-- Begin -->
 @template.layout.page(
 content = @`
-    @if(page.getName() != null)
-        Welcome, ${page.getName().toString()}!
-        <form action="${NamedRoutes.logoutPath()}" method="post">
-            <button type="submit" name="logout">Выйти</button>
-        </form>
-    @endif
-
-    @if(page.getName() == null)
-        <form action="${NamedRoutes.buildSessionPath()}">
-            <button type="submit" name="logout">Войти</button>
-        </form>
-    @endif
+    <div>
+        @if(page.getName() != null)
+            <h2>${page.getName().toString()}</h2>
+            <form action="${NamedRoutes.logoutPath()}" method="post">
+                <input type="submit" value="Выйти">
+            </form>
+        @else
+            <a href="${NamedRoutes.buildSessionPath()}">Войти</a>
+        @endif
+    </div>
 `
 )
+<!-- END -->
