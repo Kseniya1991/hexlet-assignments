@@ -8,11 +8,5 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 // BEGIN
-@AllArgsConstructor
-@Getter
-@NoArgsConstructor
-public class EditPostPage {
-    String name;
-    String body;
-}
+
 // END

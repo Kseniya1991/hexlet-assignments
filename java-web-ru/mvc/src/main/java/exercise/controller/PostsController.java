@@ -58,36 +58,6 @@ public class PostsController {
     }
 
     // BEGIN
-    public static void edit(Context ctx) {
-        var id = ctx.pathParamAsClass("id", Long.class).get();
-        var post = PostRepository.find(id)
-                .orElseThrow(() -> new NotFoundResponse("Entity with id = " + id + " not found"));
-        var page = new EditPostPage(post.getName(), post.getBody());
-        ctx.render("posts/edit.jte", Collections.singletonMap("page", page));
-    }
-    public static void update(Context ctx) {
-        try {
-            var id = ctx.pathParamAsClass("id", Long.class).get();
-            var post = PostRepository.find(id)
-                    .orElseThrow(() -> new NotFoundResponse("Entity with id = " + id + " not found"));
-            var name = ctx.formParamAsClass("name", String.class)
-                    .check(value -> value.length() >= 2, "Название не должно быть короче двух символов")
-                    .get();
-
-            var body = ctx.formParamAsClass("body", String.class)
-                    .check(value -> value.length() >= 10, "Пост должен быть не короче 10 символов")
-                    .get();
-            post.setName(name);
-            post.setBody(body);
-            PostRepository.save(post);
-            ctx.redirect(NamedRoutes.postsPath());
-
-        } catch (ValidationException e) {
-            var name = ctx.formParam("name");
-            var body = ctx.formParam("body");
-            var page = new EditPostPage(name, body);
-            ctx.render("posts/edit.jte", Collections.singletonMap("page", page)).status(422);
-        }
-    }
+    
     // END
 }
