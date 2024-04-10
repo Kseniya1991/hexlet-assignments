@@ -11,13 +11,11 @@ public class Application {
         // BEGIN
         for (Method method : Address.class.getDeclaredMethods()) {
 
-            // Проверяем, есть ли у метода аннотация @LogExecutionTime
             if (method.isAnnotationPresent(Inspect.class)) {
 
                 var startTime = System.currentTimeMillis();
 
                 try {
-                    // Выполняем метод с аннотацией LogExecutionTime
                     method.invoke(address);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -26,8 +24,8 @@ public class Application {
                 long endTime = System.currentTimeMillis();
                 long executionTime = endTime - startTime;
 
-                System.out.println("Executed method: " + method.getName());
-                System.out.println("Execution time: " + executionTime + " milliseconds");
+                System.out.println("Method " + method.getName() + "returns a value of type " + method.getAnnotatedReturnType() + ".");
+
             }
         }
         // END
