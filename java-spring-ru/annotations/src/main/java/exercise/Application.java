@@ -13,19 +13,7 @@ public class Application {
 
             if (method.isAnnotationPresent(Inspect.class)) {
 
-                var startTime = System.currentTimeMillis();
-
-                try {
-                    method.invoke(address);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                long endTime = System.currentTimeMillis();
-                long executionTime = endTime - startTime;
-
-                System.out.println("Method " + method.getName() + "returns a value of type " + method.getAnnotatedReturnType() + ".");
-
+                System.out.println("Method " + method.getName() + " returns a value of type " + method.getReturnType());
             }
         }
         // END
